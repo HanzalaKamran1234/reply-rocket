@@ -88,23 +88,39 @@ export async function POST(request: Request) {
 
     // 4. Call Gemini API
     const prompt = `
-      You are an expert sales SDR. 
-      Analyze the following text extracted from a company's website:
-      ---
-      ${pageText}
-      ---
-      
-      Based strictly on the content above, generate 3 highly personalized, distinct cold outreach messages (variants) tailored to a decision maker at this company.
-      
-      Requirements for the messages:
-      1. Reference a specific value proposition or detail you found in their website text.
-      2. Keep it concise (under 100 words per message).
-      3. Use a casual but professional tone.
-      4. Avoid marketing fluff or generic templates. 
-      5. Include a clear, low-friction Call to Action (CTA).
-      
-      Format your response as a JSON array of strings containing the 3 messages. Do not use markdown blocks, just return valid JSON.
-      Example: ["Message 1...", "Message 2...", "Message 3..."]
+You are an expert cold outreach copywriter who writes highly natural, human-like, short messages.
+
+Your task is to generate 1 personalized cold outreach opening message based on a website.
+
+Website Content to Analyze:
+---
+${pageText}
+---
+
+IMPORTANT STYLE RULES:
+* Write like a real human sending a quick DM (NOT an email)
+* Keep the message SHORT (2-3 sentences max, 20–35 words total)
+* Use simple, casual English (no corporate language)
+* DO NOT sound like a sales pitch
+* DO NOT explain too much
+* DO NOT use buzzwords like: "amplify", "leverage", "enhance", "unlock growth"
+* Avoid long sentences
+
+STRUCTURE:
+Start with "Hey, I checked your [site/store]..."
+Mention something specific and real from the website.
+End with one simple, relevant question.
+
+PERSONALIZATION RULE:
+* Mention something REAL from the website (products, layout, niche, offer)
+* Keep it natural, not forced
+
+EXAMPLE:
+"Hey, I checked your store and loved how clean your candle product pages look. Are you handling customer messages manually right now?"
+
+CRITICAL OUTPUT FORMAT:
+Return ONLY a JSON array containing exactly 1 string. No markdown, no code blocks, no extra text.
+Example: ["Hey, I checked your store and loved how clean your candle product pages look. Are you handling customer messages manually right now?"]
     `
 
     const aiResponse = await ai.models.generateContent({
@@ -119,10 +135,18 @@ export async function POST(request: Request) {
     
     let messages: string[] = []
     try {
-      messages = JSON.parse(generatedText)
+      const parsed = JSON.parse(generatedText)
+      // Accept either an array or a plain string
+      if (Array.isArray(parsed)) {
+        messages = parsed.slice(0, 1) // only take the first message
+      } else if (typeof parsed === 'string') {
+        messages = [parsed]
+      } else {
+        throw new Error('Unexpected response shape')
+      }
     } catch (e) {
       console.error('Failed to parse Gemini response', generatedText)
-      return NextResponse.json({ error: 'Failed to generate messages formatted correctly' }, { status: 500 })
+      return NextResponse.json({ error: 'Failed to generate message — please try again.' }, { status: 500 })
     }
 
     // 5. Update user usage count

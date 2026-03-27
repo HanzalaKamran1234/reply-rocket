@@ -56,7 +56,7 @@ export default function DashboardPage() {
     <div className="container" style={{ padding: '4rem 0', maxWidth: '800px' }}>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Message Generator</h1>
-        <p style={{ color: 'var(--text-muted)', fontSize: '1.25rem' }}>Enter a website URL to generate 3 personalized cold messages.</p>
+        <p style={{ color: 'var(--text-muted)', fontSize: '1.25rem' }}>Enter a website URL to generate a personalized cold outreach message.</p>
       </div>
 
       <div className="card" style={{ marginBottom: '3rem' }}>
@@ -95,7 +95,7 @@ export default function DashboardPage() {
       {!loading && messages.length > 0 && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           <h2 style={{ fontSize: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Check color="var(--success)" /> Generated Messages
+            <Check color="var(--success)" /> Your Personalized Message
           </h2>
           
           {messages.map((msg, idx) => (
@@ -113,12 +113,6 @@ export default function DashboardPage() {
               <p style={{ whiteSpace: 'pre-wrap', color: 'var(--text-main)', margin: 0 }}>{msg}</p>
             </div>
           ))}
-
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-            <button onClick={handleGenerate} className="btn btn-secondary" style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-              <RefreshCw size={18} /> Generate Alternative Variants
-            </button>
-          </div>
         </div>
       )}
     </div>
