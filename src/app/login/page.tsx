@@ -9,7 +9,7 @@ export default function LoginPage() {
       background: 'radial-gradient(ellipse at top left, rgba(79,70,229,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(124,58,237,0.12) 0%, transparent 50%), #0B0F19',
       display: 'grid',
       placeItems: 'center',
-      padding: '4rem 1.5rem',
+      padding: '3rem 1.5rem',
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -27,29 +27,41 @@ export default function LoginPage() {
         pointerEvents: 'none',
       }} />
 
-      {/* Centered content wrapper */}
+      {/* Centered content column */}
       <div style={{
         width: '100%',
         maxWidth: '460px',
-        margin: '0 auto',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        textAlign: 'center',
       }}>
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, fontSize: '1.5rem', color: '#F3F4F6', textDecoration: 'none' }}>
-            <Rocket color="#4F46E5" size={28} />
-            ReplyRocket
-          </Link>
-          <p style={{ color: '#9CA3AF', marginTop: '0.5rem', fontSize: '0.95rem', margin: '0.5rem 0 0' }}>
-            Sign in to your account
-          </p>
-        </div>
+        {/* Logo — centred */}
+        <Link href="/" style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          color: '#F3F4F6',
+          textDecoration: 'none',
+          marginBottom: '0.5rem',
+        }}>
+          <Rocket color="#4F46E5" size={28} />
+          ReplyRocket
+        </Link>
 
-        {/* Clerk SignIn — width matches wrapper */}
+        <p style={{
+          color: '#9CA3AF',
+          fontSize: '0.95rem',
+          margin: '0 0 2rem',
+        }}>
+          Welcome back — sign in to continue
+        </p>
+
+        {/* Clerk card — full width of wrapper */}
         <div style={{ width: '100%' }}>
           <SignIn
             routing="hash"
@@ -64,7 +76,7 @@ export default function LoginPage() {
                   boxShadow: '0 25px 60px rgba(0,0,0,0.7), 0 0 60px rgba(79,70,229,0.08)',
                   borderRadius: '1.25rem',
                   backdropFilter: 'blur(20px)',
-                  padding: '2rem',
+                  padding: '2.25rem',
                   margin: '0',
                 },
                 headerTitle: { display: 'none' },
@@ -112,11 +124,16 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Sign up prompt */}
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', color: '#9CA3AF', fontSize: '0.9rem' }}>
+        {/* Outside-card sign-up prompt — centred */}
+        <p style={{
+          textAlign: 'center',
+          marginTop: '1.5rem',
+          color: '#9CA3AF',
+          fontSize: '0.9rem',
+        }}>
           Don&apos;t have an account?{' '}
           <Link href="/signup" style={{ color: '#818CF8', fontWeight: 600, textDecoration: 'none' }}>
-            Sign up free →
+            Sign up
           </Link>
         </p>
       </div>

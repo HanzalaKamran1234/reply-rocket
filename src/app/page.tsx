@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Bot, Target, Zap, Check, Sparkles } from 'lucide-react'
+import PricingButton from '@/components/PricingButton'
 
 export default function Home() {
   return (
@@ -174,21 +175,21 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup" style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '0.75rem',
-                border: '1px solid rgba(255,255,255,0.12)',
-                background: 'transparent',
-                color: '#F3F4F6',
-                fontWeight: 600,
-                fontSize: '0.95rem',
-                textDecoration: 'none',
-                transition: 'background 0.2s, border-color 0.2s',
-              }}>
-                Sign Up Free
-              </Link>
+              <PricingButton
+                plan="free"
+                label="Sign Up"
+                style={{
+                  display: 'block',
+                  textAlign: 'center',
+                  padding: '0.875rem 1.5rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  background: 'transparent',
+                  color: '#F3F4F6',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                }}
+              />
             </div>
 
             {/* Pro Plan — FEATURED */}
@@ -237,21 +238,21 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup" style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '0.75rem',
-                background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: '0.95rem',
-                textDecoration: 'none',
-                boxShadow: '0 0 25px rgba(79,70,229,0.5)',
-                transition: 'opacity 0.2s, box-shadow 0.2s',
-              }}>
-                Get Started — It&apos;s Free
-              </Link>
+              <PricingButton
+                plan="pro"
+                label="Get Started"
+                style={{
+                  display: 'block',
+                  textAlign: 'center',
+                  padding: '0.875rem 1.5rem',
+                  borderRadius: '0.75rem',
+                  background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                  color: 'white',
+                  fontWeight: 700,
+                  textDecoration: 'none',
+                  boxShadow: '0 0 25px rgba(79,70,229,0.5)',
+                }}
+              />
             </div>
 
             {/* Starter Plan */}
@@ -282,21 +283,21 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <Link href="/signup" style={{
-                display: 'block',
-                textAlign: 'center',
-                padding: '0.875rem 1.5rem',
-                borderRadius: '0.75rem',
-                border: '1px solid rgba(255,255,255,0.12)',
-                background: 'transparent',
-                color: '#F3F4F6',
-                fontWeight: 600,
-                fontSize: '0.95rem',
-                textDecoration: 'none',
-                transition: 'background 0.2s, border-color 0.2s',
-              }}>
-                Get Starter
-              </Link>
+              <PricingButton
+                plan="starter"
+                label="Get Starter"
+                style={{
+                  display: 'block',
+                  textAlign: 'center',
+                  padding: '0.875rem 1.5rem',
+                  borderRadius: '0.75rem',
+                  border: '1px solid rgba(255,255,255,0.12)',
+                  background: 'transparent',
+                  color: '#F3F4F6',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                }}
+              />
             </div>
 
           </div>

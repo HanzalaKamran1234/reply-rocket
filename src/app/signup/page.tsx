@@ -9,7 +9,7 @@ export default function SignupPage() {
       background: 'radial-gradient(ellipse at top right, rgba(124,58,237,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom left, rgba(79,70,229,0.12) 0%, transparent 50%), #0B0F19',
       display: 'grid',
       placeItems: 'center',
-      padding: '4rem 1.5rem',
+      padding: '3rem 1.5rem',
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -27,29 +27,42 @@ export default function SignupPage() {
         pointerEvents: 'none',
       }} />
 
-      {/* Centered content wrapper */}
+      {/* Centered content column */}
       <div style={{
         width: '100%',
         maxWidth: '460px',
-        margin: '0 auto',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        textAlign: 'center',
       }}>
-        {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <Link href="/" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, fontSize: '1.5rem', color: '#F3F4F6', textDecoration: 'none' }}>
-            <Rocket color="#4F46E5" size={28} />
-            ReplyRocket
-          </Link>
-          <p style={{ color: '#9CA3AF', marginTop: '0.5rem', fontSize: '0.95rem', margin: '0.5rem 0 0' }}>
-            Create your free account
-          </p>
-        </div>
+        {/* Logo — centred */}
+        <Link href="/" style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          color: '#F3F4F6',
+          textDecoration: 'none',
+          marginBottom: '0.5rem',
+        }}>
+          <Rocket color="#4F46E5" size={28} />
+          ReplyRocket
+        </Link>
+
+        <p style={{
+          color: '#9CA3AF',
+          fontSize: '0.95rem',
+          margin: '0 0 2rem',
+        }}>
+          Create your free account — no credit card needed
+        </p>
 
         {/* Clerk SignUp — full width of wrapper */}
+        {/* First name & last name are enabled in: Clerk Dashboard → User & Authentication → Personal Information */}
         <div style={{ width: '100%' }}>
           <SignUp
             routing="hash"
@@ -64,11 +77,16 @@ export default function SignupPage() {
                   boxShadow: '0 25px 60px rgba(0,0,0,0.7), 0 0 60px rgba(79,70,229,0.08)',
                   borderRadius: '1.25rem',
                   backdropFilter: 'blur(20px)',
-                  padding: '2rem',
+                  padding: '2.25rem',
                   margin: '0',
                 },
                 headerTitle: { display: 'none' },
                 headerSubtitle: { display: 'none' },
+                /* Name fields — shown when enabled in Clerk dashboard */
+                formFieldRow: {
+                  display: 'flex',
+                  gap: '0.75rem',
+                },
                 socialButtonsBlockButton: {
                   background: 'rgba(255,255,255,0.05)',
                   border: '1px solid rgba(255,255,255,0.12)',
@@ -112,11 +130,16 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Sign in prompt */}
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', color: '#9CA3AF', fontSize: '0.9rem' }}>
+        {/* Outside-card sign-in prompt — centred */}
+        <p style={{
+          textAlign: 'center',
+          marginTop: '1.5rem',
+          color: '#9CA3AF',
+          fontSize: '0.9rem',
+        }}>
           Already have an account?{' '}
           <Link href="/login" style={{ color: '#818CF8', fontWeight: 600, textDecoration: 'none' }}>
-            Sign in →
+            Sign in
           </Link>
         </p>
       </div>
