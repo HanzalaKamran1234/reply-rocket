@@ -5,14 +5,16 @@ import PricingButton from '@/components/PricingButton'
 export default function Home() {
   return (
     <div>
-      {/* Hero Section */}
-      <section style={{ 
-        padding: '7rem 0 5rem', 
-        textAlign: 'center',
-        background: 'radial-gradient(ellipse at top, rgba(79, 70, 229, 0.18), transparent 60%)',
-        position: 'relative',
-        overflow: 'hidden',
-      }}>
+      <section
+        className="hero-section"
+        style={{
+          padding: '7rem 0 5rem',
+          textAlign: 'center',
+          background: 'radial-gradient(ellipse at top, rgba(79, 70, 229, 0.18), transparent 60%)',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
         {/* Decorative grid */}
         <div style={{
           position: 'absolute', inset: 0,
@@ -56,7 +58,7 @@ export default function Home() {
           <p style={{ fontSize: '1.2rem', color: '#9CA3AF', marginBottom: '2.5rem', lineHeight: 1.7, maxWidth: '620px', margin: '0 auto 2.5rem' }}>
             Stop sending generic templates. ReplyRocket analyzes your lead&apos;s website and uses AI to generate highly-targeted, hyper-personalized outreach messages that actually get replies.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div className="hero-buttons">
             <Link href="/signup" className="btn btn-primary" style={{ 
               padding: '0.875rem 2rem', 
               fontSize: '1.05rem', 
@@ -84,7 +86,7 @@ export default function Home() {
             <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', marginBottom: '1rem' }}>How ReplyRocket Works</h2>
             <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '500px', margin: '0 auto' }}>Three simple steps to perfect outreach.</p>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+          <div className="features-grid">
             {[
               { icon: <Target size={32} />, step: '01', title: 'Enter Lead URL', desc: "Paste the website URL of your prospect. We'll handle the rest automatically." },
               { icon: <Bot size={32} />, step: '02', title: 'AI Analysis', desc: "Our AI scrapes and deeply analyzes the company's value proposition and target audience." },
@@ -145,7 +147,7 @@ export default function Home() {
             </p>
           </div>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem', maxWidth: '1000px', margin: '0 auto', alignItems: 'start' }}>
+          <div className="pricing-grid">
             
             {/* Free Plan */}
             <div style={{ 

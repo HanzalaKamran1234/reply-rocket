@@ -53,14 +53,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="container" style={{ padding: '4rem 0', maxWidth: '800px' }}>
+    <div className="container dashboard-container" style={{ padding: '4rem 0', maxWidth: '800px' }}>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Message Generator</h1>
         <p style={{ color: 'var(--text-muted)', fontSize: '1.25rem' }}>Enter a website URL to generate a personalized cold outreach message.</p>
       </div>
 
       <div className="card" style={{ marginBottom: '3rem' }}>
-        <form onSubmit={handleGenerate} style={{ display: 'flex', gap: '1rem' }}>
+        <form onSubmit={handleGenerate} className="dashboard-form"> 
           <input 
             type="url" 
             className="input" 

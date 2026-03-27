@@ -4,15 +4,18 @@ import { Rocket } from "lucide-react";
 
 export default function LoginPage() {
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'radial-gradient(ellipse at top left, rgba(79,70,229,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(124,58,237,0.12) 0%, transparent 50%), #0B0F19',
-      display: 'grid',
-      placeItems: 'center',
-      padding: '3rem 1.5rem',
-      position: 'relative',
-      overflow: 'hidden',
-    }}>
+    <div
+      className="auth-page"
+      style={{
+        minHeight: '100vh',
+        background: 'radial-gradient(ellipse at top left, rgba(79,70,229,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(124,58,237,0.12) 0%, transparent 50%), #0B0F19',
+        display: 'grid',
+        placeItems: 'center',
+        padding: '3rem 1.5rem',
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
       {/* Decorative orbs */}
       <div style={{
         position: 'absolute', top: '-10rem', left: '-10rem',
