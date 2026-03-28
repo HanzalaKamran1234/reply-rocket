@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useAuth } from '@clerk/nextjs'
 
 interface PricingButtonProps {
   plan: 'free' | 'starter' | 'pro'
@@ -11,6 +12,7 @@ interface PricingButtonProps {
 
 export default function PricingButton({ plan, label, style }: PricingButtonProps) {
   const [loading, setLoading] = useState(false)
+  const { userId } = useAuth()
 
   if (plan === 'free') {
     return (
@@ -21,6 +23,11 @@ export default function PricingButton({ plan, label, style }: PricingButtonProps
   }
 
   const handleClick = async () => {
+    if (!userId) {
+      window.location.href = '/signup'
+      return
+    }
+
     setLoading(true)
     try {
       const res = await fetch('/api/stripe/create-checkout-session', {
@@ -28,6 +35,11 @@ export default function PricingButton({ plan, label, style }: PricingButtonProps
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan }),
       })
+
+      if (res.status === 401) {
+        window.location.href = '/signup'
+        return
+      }
 
       const data = await res.json()
 

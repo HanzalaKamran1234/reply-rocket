@@ -25,10 +25,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid plan selected' }, { status: 400 })
     }
 
-    let priceId = ENTITY_IDS[plan]
+    let priceId = ENTITY_IDS[plan]?.trim()
 
     // If the provided ID is a Product ID, fetch its default price from the Stripe API
-    if (priceId.startsWith('prod_')) {
+    if (priceId && priceId.startsWith('prod_')) {
       const product = await stripe.products.retrieve(priceId);
       if (typeof product.default_price === 'string') {
         priceId = product.default_price;
