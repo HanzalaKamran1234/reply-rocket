@@ -93,6 +93,12 @@ export default function ContactPage() {
                 </div>
               )}
 
+              {/* Honeypot field - visually hidden but available to bots */}
+              <div style={{ position: 'absolute', left: '-9999px', top: '-9999px' }} aria-hidden="true">
+                <label htmlFor="bot_field">Don&apos;t fill this out if you&apos;re human</label>
+                <input id="bot_field" name="bot_field" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
+
               <div>
                 <label htmlFor="name">Name</label>
                 <input

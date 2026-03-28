@@ -18,9 +18,12 @@ CREATE TABLE public.users (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- We disable RLS on public.users because the server completely handles data securely
--- Or we enforce RLS cautiously:
--- ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+-- We fully lock down tables with RLS since the app accesses DB entirely through 
+-- the secure backend Next.js API using the Service Role Key. 
+-- No client-side direct JS access is permitted for 'users' and 'generations'.
+ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Block all anon client access to users" ON public.users FOR ALL TO anon USING (false);
+CREATE POLICY "Block all authenticated client access to users" ON public.users FOR ALL TO authenticated USING (false);
 
 -- 3. Create generations table
 CREATE TABLE public.generations (
@@ -31,7 +34,8 @@ CREATE TABLE public.generations (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- Turn off RLS since we access DB through secure server using Anon key and Server logic
--- Note: It is recommended to use the Supabase Service Role Key on the backend if RLS is disabled, 
--- but since only the Next.js server accesses the Supabase REST API securely, disabled RLS + Anon Key works for rapid dev. 
--- However, for production, you should use the Service Role Key.
+ALTER TABLE public.generations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Block all anon client access to gen" ON public.generations FOR ALL TO anon USING (false);
+CREATE POLICY "Block all authenticated client access to gen" ON public.generations FOR ALL TO authenticated USING (false);
+
+-- The application backend uses the SUPABASE_SERVICE_ROLE_KEY which bypasses RLS completely.

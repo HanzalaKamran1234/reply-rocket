@@ -60,10 +60,6 @@ export default function PrivacyPage() {
             <p>We will only retain your personal data for as long as reasonably necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, regulatory, tax, accounting or reporting requirements.</p>
           </section>
 
-          <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: '#F8FAFC', borderRadius: '0.75rem', border: '1px solid #E2E8F0' }}>
-            <p style={{ fontWeight: 600, color: '#0F172A', marginBottom: '0.5rem' }}>Privacy Concerns?</p>
-            <p>If you have any questions about this Privacy Policy or our privacy practices, please contact us at <a href="mailto:privacy@replyrocket.ai" style={{ color: '#3B82F6', textDecoration: 'none', fontWeight: 500 }}>privacy@replyrocket.ai</a></p>
-          </div>
         </div>
       </div>
     </div>

@@ -47,10 +47,6 @@ export default function TermsPage() {
             <p>These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which the company is registered, without regard to its conflict of law provisions.</p>
           </section>
 
-          <div style={{ marginTop: '2rem', padding: '1.5rem', backgroundColor: '#F8FAFC', borderRadius: '0.75rem', border: '1px solid #E2E8F0' }}>
-            <p style={{ fontWeight: 600, color: '#0F172A', marginBottom: '0.5rem' }}>Questions about our Terms?</p>
-            <p>If you have any questions, please contact us at <a href="mailto:support@replyrocket.ai" style={{ color: '#3B82F6', textDecoration: 'none', fontWeight: 500 }}>support@replyrocket.ai</a></p>
-          </div>
         </div>
       </div>
     </div>

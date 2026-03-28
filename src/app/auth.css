@@ -1,0 +1,22 @@
+/* ══════════════════════════════════════════════
+   AUTH LAYOUT
+   ══════════════════════════════════════════════ */
+.auth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 3.75rem);
+}
+
+.auth-panel-left {
+  display: flex !important;
+}
+
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .auth-panel-left {
+    display: none !important; /* Hide the art panel on smaller screens to keep focus on form */
+  }
+}

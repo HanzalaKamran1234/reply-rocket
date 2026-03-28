@@ -3,6 +3,8 @@ import { createClient } from '@/utils/supabase/server'
 import { GoogleGenAI } from '@google/genai'
 import { auth, currentUser } from '@clerk/nextjs/server'
 import * as cheerio from 'cheerio'
+import { validatePublicUrl } from '@/lib/ssrfGuard'
+import { checkRateLimit } from '@/lib/rateLimit'
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY })
 
@@ -17,11 +19,26 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
 
+    // Apply Rate Limiting
+    const rateLimit = checkRateLimit(userId, 6, 60_000) // 6 req per minute
+    if (!rateLimit.allowed) {
+      return NextResponse.json({ error: 'Rate limit exceeded. Please try again in a minute.' }, { status: 429 })
+    }
+
     const { url } = await request.json()
 
     if (!url) {
       return NextResponse.json({ error: 'URL is required' }, { status: 400 })
     }
+
+    // SSRF Prevention validation
+    let safeUrlObj: URL
+    try {
+      safeUrlObj = await validatePublicUrl(url)
+    } catch (e: any) {
+      return NextResponse.json({ error: e.message || 'Invalid or unsafe URL.' }, { status: 400 })
+    }
+    const safeUrlString = safeUrlObj.toString()
 
     // 2. Fetch user data from Supabase or lazy create if new
     let { data: userData, error: userError } = await supabase
@@ -74,12 +91,26 @@ export async function POST(request: Request) {
     }
 
     // 3. Scrape the URL
-    console.log(`Scraping URL: ${url}`)
-    const response = await fetch(url, {
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; ReplyRocketBot/1.0; +http://replyrocket.io)'
-      }
-    })
+    console.log(`Scraping URL: ${safeUrlString}`)
+    
+    // Add a strict 5s timeout to fetch
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 5000)
+
+    let response: Response
+    try {
+      response = await fetch(safeUrlString, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; ReplyRocketBot/1.0; +http://replyrocket.io)',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+        }
+      })
+      clearTimeout(timeoutId)
+    } catch (e) {
+      clearTimeout(timeoutId)
+      return NextResponse.json({ error: 'Connection to website failed or timed out.' }, { status: 400 })
+    }
 
     if (!response.ok) {
       return NextResponse.json({ error: 'Failed to access the provided URL' }, { status: 400 })
@@ -171,14 +202,15 @@ Example: ["Message variant 1"${variantCount >= 2 ? ', "Message variant 2"' : ''}
       .from('generations')
       .insert({
         user_id: userId,
-        input_url: url,
+        input_url: safeUrlString,
         output_text: JSON.stringify(messages)
       })
 
     return NextResponse.json({ messages })
 
-  } catch (error: any) {
-    console.error('API /generate Error:', error)
-    return NextResponse.json({ error: error.message || 'Internal Server Error' }, { status: 500 })
+  } catch (error: Error | any) {
+    console.error('API /generate Error:', error?.message || error)
+    // Avoid leaking stack traces to the client
+    return NextResponse.json({ error: 'An internal server error occurred during generation.' }, { status: 500 })
   }
 }

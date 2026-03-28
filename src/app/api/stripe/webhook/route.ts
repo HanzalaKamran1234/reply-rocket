@@ -27,13 +27,18 @@ export async function POST(req: Request) {
   if (event.type === 'checkout.session.completed') {
     const session = event.data.object as Stripe.Checkout.Session
 
+    if (session.payment_status !== 'paid') {
+      return NextResponse.json({ error: 'Payment not successful' }, { status: 400 })
+    }
+
     // Retrieve the customer and plan details
     const customerId = session.customer as string
     const customerEmail = session.customer_details?.email
 
     // Find user in Supabase or Clerk to apply upgrade
     if (customerEmail) {
-      const plan = session.amount_total === 1900 ? 'pro' : 'starter'
+      // Relying on total amount (e.g., >= 1900 cents)
+      const plan = (session.amount_total && session.amount_total >= 1900) ? 'pro' : 'starter'
       
       const { data: user } = await supabase
         .from('users')

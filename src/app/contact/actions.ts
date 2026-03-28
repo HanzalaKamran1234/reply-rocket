@@ -2,15 +2,34 @@
 
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
+// resend is initialized inside the action to ensure process.env is ready
 export async function sendContactMessage(formData: FormData) {
-  const name = formData.get('name') as string
-  const email = formData.get('email') as string
-  const message = formData.get('message') as string
+  // Honeypot check
+  const botField = formData.get('bot_field')
+  if (botField) {
+    return { success: false, error: 'Form validation failed.' }
+  }
+  const apiKey = process.env.RESEND_API_KEY?.trim()
+  if (!apiKey) {
+    console.error('RESEND_API_KEY is not configured')
+    return { success: false, error: 'Email service is not configured.' }
+  }
+  const resend = new Resend(apiKey)
+
+  const name = (formData.get('name') as string)?.trim() || ''
+  const email = (formData.get('email') as string)?.trim() || ''
+  const message = (formData.get('message') as string)?.trim() || ''
 
   if (!name || !email || !message) {
     return { success: false, error: 'All fields are required.' }
+  }
+
+  if (name.length > 100) return { success: false, error: 'Name is too long.' }
+  if (message.length > 2000) return { success: false, error: 'Message is too long.' }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(email) || email.length > 150) {
+    return { success: false, error: 'Invalid email address.' }
   }
 
   try {
