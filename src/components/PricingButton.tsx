@@ -49,13 +49,16 @@ export default function PricingButton({ plan, label, style }: PricingButtonProps
       disabled={loading}
       style={{
         ...style,
-        display: 'block',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         width: '100%',
         cursor: loading ? 'not-allowed' : 'pointer',
-        opacity: loading ? 0.7 : 1,
-        border: 'none',
-        fontFamily: 'inherit',
-        fontSize: '0.95rem',
+        opacity: loading ? 0.65 : 1,
+        fontFamily: 'var(--font-main)',
+        fontSize: '0.9rem',
+        fontWeight: 600,
+        transition: 'opacity 0.15s ease',
       }}
     >
       {loading ? 'Redirecting…' : label}

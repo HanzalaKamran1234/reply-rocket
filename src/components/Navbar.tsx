@@ -13,45 +13,35 @@ export default function Navbar({ userId }: NavbarProps) {
   const [open, setOpen] = useState(false)
 
   return (
-    <nav
-      style={{
-        borderBottom: '1px solid var(--border-color)',
-        background: 'rgba(11, 15, 25, 0.9)',
-        backdropFilter: 'blur(12px)',
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-      }}
-    >
+    <nav className="navbar">
       {/* Top bar */}
-      <div
-        className="container"
-        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '4rem' }}
-      >
+      <div className="container navbar-inner">
         {/* Logo */}
         <Link
           href="/"
-          style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-main)' }}
+          className="logo-link"
           onClick={() => setOpen(false)}
         >
-          <Rocket color="var(--primary)" size={24} />
+          <Rocket color="#3B82F6" size={22} />
           ReplyRocket
         </Link>
 
         {/* Desktop links */}
         <div className="nav-links">
-          <Link href="/#pricing" style={{ color: 'var(--text-muted)', fontWeight: 500 }} className="btn">
-            Pricing
-          </Link>
+          <Link href="/#how-it-works" className="nav-link">How it works</Link>
+          <Link href="/#pricing" className="nav-link">Pricing</Link>
+
           {!userId ? (
             <>
-              <Link href="/login" className="btn btn-secondary">Log in</Link>
-              <Link href="/signup" className="btn btn-primary">Get Started</Link>
+              <Link href="/login" className="btn btn-ghost" style={{ marginLeft: '0.25rem' }}>Log in</Link>
+              <Link href="/signup" className="btn btn-primary" style={{ marginLeft: '0.25rem' }}>Get Started</Link>
             </>
           ) : (
             <>
-              <Link href="/dashboard" className="btn btn-secondary">Dashboard</Link>
-              <UserButton />
+              <Link href="/dashboard" className="btn btn-secondary" style={{ marginLeft: '0.25rem' }}>Dashboard</Link>
+              <div style={{ marginLeft: '0.5rem' }}>
+                <UserButton />
+              </div>
             </>
           )}
         </div>
@@ -62,15 +52,14 @@ export default function Navbar({ userId }: NavbarProps) {
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={() => setOpen((o) => !o)}
         >
-          {open ? <X size={26} /> : <Menu size={26} />}
+          {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {/* Mobile drawer */}
       <div className={`mobile-menu${open ? ' open' : ''}`}>
-        <Link href="/#pricing" className="btn btn-secondary" onClick={() => setOpen(false)}>
-          Pricing
-        </Link>
+        <Link href="/#how-it-works" className="btn btn-ghost" onClick={() => setOpen(false)}>How it works</Link>
+        <Link href="/#pricing" className="btn btn-ghost" onClick={() => setOpen(false)}>Pricing</Link>
         {!userId ? (
           <>
             <Link href="/login" className="btn btn-secondary" onClick={() => setOpen(false)}>Log in</Link>
@@ -79,7 +68,7 @@ export default function Navbar({ userId }: NavbarProps) {
         ) : (
           <>
             <Link href="/dashboard" className="btn btn-secondary" onClick={() => setOpen(false)}>Dashboard</Link>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '0.25rem' }}>
               <UserButton />
             </div>
           </>

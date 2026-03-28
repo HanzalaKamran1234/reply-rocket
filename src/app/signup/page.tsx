@@ -4,37 +4,27 @@ import { Rocket } from "lucide-react";
 
 export default function SignupPage() {
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: 'radial-gradient(ellipse at top right, rgba(124,58,237,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom left, rgba(79,70,229,0.12) 0%, transparent 50%), #0B0F19',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '2rem 1.25rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Decorative orbs */}
+    <div style={{
+      minHeight: '100vh',
+      backgroundColor: 'var(--bg-secondary)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '2.5rem 1.25rem',
+      position: 'relative',
+    }}>
+      {/* Subtle top gradient */}
       <div style={{
-        position: 'absolute', top: '-10rem', right: '-10rem',
-        width: '40rem', height: '40rem', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', bottom: '-10rem', left: '-10rem',
-        width: '35rem', height: '35rem', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(79,70,229,0.07) 0%, transparent 70%)',
+        position: 'absolute', top: 0, left: 0, right: 0,
+        height: '300px',
+        background: 'radial-gradient(ellipse 70% 50% at 50% -10%, rgba(59,130,246,0.06), transparent)',
         pointerEvents: 'none',
       }} />
 
-      {/* Centered content column */}
       <div style={{
         width: '100%',
-        maxWidth: '480px',
+        maxWidth: '440px',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
@@ -48,25 +38,26 @@ export default function SignupPage() {
           alignItems: 'center',
           gap: '0.5rem',
           fontWeight: 700,
-          fontSize: '1.5rem',
-          color: '#F3F4F6',
+          fontSize: '1.125rem',
+          color: 'var(--text-main)',
           textDecoration: 'none',
-          marginBottom: '0.5rem',
+          marginBottom: '0.375rem',
+          letterSpacing: '-0.01em',
         }}>
-          <Rocket color="#4F46E5" size={28} />
+          <Rocket color="#3B82F6" size={22} />
           ReplyRocket
         </Link>
 
         <p style={{
-          color: '#9CA3AF',
-          fontSize: '0.95rem',
+          color: 'var(--text-secondary)',
+          fontSize: '0.9375rem',
           margin: '0 0 1.75rem',
         }}>
           Create your free account — no credit card needed
         </p>
 
         {/* Clerk SignUp card */}
-        {/* First name & last name are enabled in: Clerk Dashboard → User & Authentication → Personal Information */}
+        {/* Name fields enabled in: Clerk Dashboard → User & Authentication → Personal Information */}
         <div style={{ width: '100%' }}>
           <SignUp
             routing="hash"
@@ -76,73 +67,73 @@ export default function SignupPage() {
                 rootBox: { width: '100%' },
                 card: {
                   width: '100%',
-                  background: 'linear-gradient(135deg, rgba(17,24,39,0.98), rgba(11,15,25,0.99))',
-                  border: '1px solid rgba(79,70,229,0.2)',
-                  boxShadow: '0 25px 60px rgba(0,0,0,0.7), 0 0 60px rgba(79,70,229,0.08)',
-                  borderRadius: '1.25rem',
-                  backdropFilter: 'blur(20px)',
-                  padding: '2.25rem',
+                  background: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                  borderRadius: '1rem',
+                  padding: '2rem',
                   margin: '0',
                 },
                 headerTitle: { display: 'none' },
                 headerSubtitle: { display: 'none' },
-                /* Name fields — shown when enabled in Clerk dashboard */
                 formFieldRow: {
                   display: 'flex',
                   gap: '0.75rem',
                 },
                 socialButtonsBlockButton: {
-                  background: 'rgba(255,255,255,0.05)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  color: '#F3F4F6',
-                  borderRadius: '0.6rem',
+                  background: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  color: '#0F172A',
+                  borderRadius: '0.5rem',
                   fontWeight: '500',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
                 },
-                socialButtonsBlockButtonText: { color: '#F3F4F6', fontWeight: '500' },
-                socialButtonsBlockButtonArrow: { color: '#F3F4F6' },
-                dividerLine: { background: 'rgba(255,255,255,0.08)' },
-                dividerText: { color: '#6B7280' },
-                formFieldLabel: { color: '#D1D5DB', fontWeight: '500' },
+                socialButtonsBlockButtonText: { color: '#0F172A', fontWeight: '500' },
+                socialButtonsBlockButtonArrow: { color: '#94A3B8' },
+                dividerLine: { background: '#E2E8F0' },
+                dividerText: { color: '#94A3B8' },
+                formFieldLabel: { color: '#0F172A', fontWeight: '500', fontSize: '0.875rem' },
                 formFieldInput: {
-                  background: 'rgba(11,15,25,0.8)',
-                  border: '1px solid rgba(79,70,229,0.25)',
-                  color: '#F3F4F6',
-                  borderRadius: '0.6rem',
+                  background: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  color: '#0F172A',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.9375rem',
                 },
-                formFieldInputShowPasswordButton: { color: '#9CA3AF' },
+                formFieldInputShowPasswordButton: { color: '#94A3B8' },
                 formButtonPrimary: {
-                  background: 'linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%)',
+                  background: '#3B82F6',
                   color: 'white',
                   fontWeight: '600',
-                  fontSize: '1rem',
-                  borderRadius: '0.6rem',
-                  boxShadow: '0 0 25px rgba(79,70,229,0.45)',
+                  fontSize: '0.9375rem',
+                  borderRadius: '0.5rem',
+                  boxShadow: '0 1px 3px rgba(59,130,246,0.25)',
                   border: 'none',
                 },
-                footerActionLink: { color: '#818CF8' },
-                footerActionText: { color: '#9CA3AF' },
-                identityPreviewText: { color: '#F3F4F6' },
-                formResendCodeLink: { color: '#818CF8' },
-                alertText: { color: '#F3F4F6' },
+                footerActionLink: { color: '#3B82F6', fontWeight: '500' },
+                footerActionText: { color: '#475569' },
+                identityPreviewText: { color: '#0F172A' },
+                formResendCodeLink: { color: '#3B82F6' },
+                alertText: { color: '#0F172A' },
                 otpCodeFieldInput: {
-                  background: 'rgba(11,15,25,0.8)',
-                  border: '1px solid rgba(79,70,229,0.25)',
-                  color: '#F3F4F6',
+                  background: '#FFFFFF',
+                  border: '1px solid #E2E8F0',
+                  color: '#0F172A',
+                  borderRadius: '0.5rem',
                 },
               }
             }}
           />
         </div>
 
-        {/* Sign-in prompt */}
         <p style={{
           textAlign: 'center',
-          marginTop: '1.5rem',
-          color: '#9CA3AF',
-          fontSize: '0.9rem',
+          marginTop: '1.375rem',
+          color: 'var(--text-secondary)',
+          fontSize: '0.875rem',
         }}>
           Already have an account?{' '}
-          <Link href="/login" style={{ color: '#818CF8', fontWeight: 600, textDecoration: 'none' }}>
+          <Link href="/login" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
             Sign in
           </Link>
         </p>

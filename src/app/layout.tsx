@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { auth } from '@clerk/nextjs/server'
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
+import { Rocket } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'ReplyRocket | Hyper-personalized cold outreach messages',
@@ -21,69 +22,65 @@ export default async function RootLayout({
     <ClerkProvider
       appearance={{
         variables: {
-          colorPrimary: '#4F46E5',
-          colorBackground: '#111827',
-          colorText: '#F3F4F6',
-          colorTextSecondary: '#9CA3AF',
-          colorInputBackground: '#0B0F19',
-          colorInputText: '#F3F4F6',
-          colorNeutral: '#F3F4F6',
+          colorPrimary: '#3B82F6',
+          colorBackground: '#FFFFFF',
+          colorText: '#0F172A',
+          colorTextSecondary: '#475569',
+          colorInputBackground: '#FFFFFF',
+          colorInputText: '#0F172A',
+          colorNeutral: '#0F172A',
           colorTextOnPrimaryBackground: '#FFFFFF',
-          colorShimmer: 'rgba(255, 255, 255, 0.05)',
+          colorShimmer: 'rgba(0,0,0,0.04)',
           borderRadius: '0.5rem',
           fontFamily: 'Inter, sans-serif',
         },
         elements: {
           rootBox: { width: '100%' },
           card: {
-            background: 'linear-gradient(135deg, rgba(17,24,39,0.95), rgba(11,15,25,0.98))',
-            border: '1px solid rgba(79,70,229,0.25)',
-            boxShadow: '0 25px 50px rgba(0,0,0,0.6), 0 0 40px rgba(79,70,229,0.1)',
+            background: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
             borderRadius: '1rem',
-            backdropFilter: 'blur(20px)',
           },
-          headerTitle: { color: '#F3F4F6', fontSize: '1.75rem', fontWeight: '700' },
-          headerSubtitle: { color: '#9CA3AF' },
+          headerTitle: { color: '#0F172A', fontSize: '1.5rem', fontWeight: '700' },
+          headerSubtitle: { color: '#475569' },
           socialButtonsBlockButton: {
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.1)',
-            color: '#F3F4F6',
+            background: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            color: '#0F172A',
             borderRadius: '0.5rem',
+            boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
           },
-          socialButtonsBlockButtonText: { color: '#F3F4F6', fontWeight: '500' },
-          socialButtonsBlockButtonArrow: { color: '#F3F4F6' },
-          dividerLine: { background: 'rgba(255,255,255,0.1)' },
-          dividerText: { color: '#9CA3AF' },
-          formFieldLabel: { color: '#D1D5DB', fontWeight: '500' },
+          socialButtonsBlockButtonText: { color: '#0F172A', fontWeight: '500' },
+          dividerLine: { background: '#E2E8F0' },
+          dividerText: { color: '#94A3B8' },
+          formFieldLabel: { color: '#0F172A', fontWeight: '500' },
           formFieldInput: {
-            background: '#0B0F19',
-            border: '1px solid rgba(79,70,229,0.3)',
-            color: '#F3F4F6',
+            background: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            color: '#0F172A',
             borderRadius: '0.5rem',
           },
-          formFieldInputShowPasswordButton: { color: '#9CA3AF' },
+          formFieldInputShowPasswordButton: { color: '#94A3B8' },
           formButtonPrimary: {
-            background: 'linear-gradient(135deg, #4F46E5, #7C3AED)',
+            background: '#3B82F6',
             color: 'white',
             fontWeight: '600',
-            fontSize: '1rem',
+            fontSize: '0.9375rem',
             borderRadius: '0.5rem',
-            boxShadow: '0 0 20px rgba(79,70,229,0.4)',
+            boxShadow: '0 1px 2px rgba(59,130,246,0.2)',
           },
-          footerActionLink: { color: '#818CF8' },
-          footerActionText: { color: '#9CA3AF' },
-          identityPreviewText: { color: '#F3F4F6' },
-          identityPreviewEditButtonIcon: { color: '#9CA3AF' },
-          formResendCodeLink: { color: '#818CF8' },
-          alertText: { color: '#F3F4F6' },
-          formHeaderTitle: { color: '#F3F4F6' },
-          formHeaderSubtitle: { color: '#9CA3AF' },
+          footerActionLink: { color: '#3B82F6' },
+          footerActionText: { color: '#475569' },
+          identityPreviewText: { color: '#0F172A' },
+          formResendCodeLink: { color: '#3B82F6' },
+          alertText: { color: '#0F172A' },
           otpCodeFieldInput: {
-            background: '#0B0F19',
-            border: '1px solid rgba(79,70,229,0.3)',
-            color: '#F3F4F6',
+            background: '#FFFFFF',
+            border: '1px solid #E2E8F0',
+            color: '#0F172A',
           },
-          badge: { background: 'rgba(79,70,229,0.15)', color: '#818CF8' },
+          badge: { background: '#EFF6FF', color: '#3B82F6' },
         }
       }}
     >
@@ -94,18 +91,42 @@ export default async function RootLayout({
         <body>
           <Navbar userId={userId} />
 
-          <main style={{ minHeight: 'calc(100vh - 64px)' }}>
+          <main style={{ minHeight: 'calc(100vh - 3.75rem)' }}>
             {children}
           </main>
 
-          <footer style={{ borderTop: '1px solid var(--border-color)', padding: '2rem 0', marginTop: 'auto', backgroundColor: 'var(--bg-secondary)' }}>
+          {/* ── Footer ── */}
+          <footer style={{
+            borderTop: '1px solid var(--border-color)',
+            backgroundColor: 'var(--bg-secondary)',
+            padding: '2.5rem 0',
+          }}>
             <div className="container footer-inner">
-              <p style={{ margin: 0 }}>© {new Date().getFullYear()} ReplyRocket. All rights reserved.</p>
-              <div style={{ display: 'flex', gap: '1.25rem' }}>
-                <Link href="/terms" style={{ color: 'var(--text-muted)' }}>Terms</Link>
-                <Link href="/privacy" style={{ color: 'var(--text-muted)' }}>Privacy</Link>
-                <Link href="/contact" style={{ color: 'var(--text-muted)' }}>Contact</Link>
+              {/* Brand */}
+              <Link href="/" style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.4375rem',
+                fontWeight: 700,
+                fontSize: '1rem',
+                color: 'var(--text-main)',
+                letterSpacing: '-0.01em',
+              }}>
+                <Rocket color="#3B82F6" size={18} />
+                ReplyRocket
+              </Link>
+
+              {/* Legal links */}
+              <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+                <Link href="/terms"   style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Terms</Link>
+                <Link href="/privacy" style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Privacy</Link>
+                <Link href="/contact" style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>Contact</Link>
               </div>
+
+              {/* Copyright */}
+              <p style={{ margin: 0, color: 'var(--text-muted)', fontSize: '0.875rem' }}>
+                © {new Date().getFullYear()} ReplyRocket
+              </p>
             </div>
           </footer>
         </body>
