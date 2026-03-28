@@ -5,58 +5,53 @@ import { Rocket } from "lucide-react";
 export default function LoginPage() {
   return (
     <div style={{
-      minHeight: '100vh',
-      backgroundColor: 'var(--bg-secondary)',
+      minHeight: 'calc(100vh - 3.75rem)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '2.5rem 1.25rem',
+      padding: '3rem 1rem',
+      backgroundColor: 'var(--bg-main)',
       position: 'relative',
+      overflow: 'hidden',
     }}>
-      {/* Subtle top gradient */}
+      {/* Background Glows */}
       <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0,
-        height: '300px',
-        background: 'radial-gradient(ellipse 70% 50% at 50% -10%, rgba(59,130,246,0.06), transparent)',
+        position: 'absolute', top: '10%', left: '50%', transform: 'translateX(-50%)',
+        width: '600px', height: '600px', borderRadius: '50%',
+        background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 60%)',
         pointerEvents: 'none',
       }} />
 
       <div style={{
         width: '100%',
-        maxWidth: '440px',
+        maxWidth: '400px',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        textAlign: 'center',
       }}>
-        {/* Logo */}
+        {/* Header / Logo */}
         <Link href="/" style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          fontWeight: 700,
-          fontSize: '1.125rem',
-          color: 'var(--text-main)',
-          textDecoration: 'none',
-          marginBottom: '0.375rem',
-          letterSpacing: '-0.01em',
+          display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+          fontWeight: 700, fontSize: '1.25rem', color: 'var(--text-main)',
+          textDecoration: 'none', letterSpacing: '-0.01em',
+          marginBottom: '2rem',
         }}>
-          <Rocket color="#3B82F6" size={22} />
+          <Rocket color="#3B82F6" size={24} />
           ReplyRocket
         </Link>
 
-        <p style={{
-          color: 'var(--text-secondary)',
-          fontSize: '0.9375rem',
-          margin: '0 0 1.75rem',
-        }}>
-          Welcome back — sign in to continue
-        </p>
+        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.02em', color: 'var(--text-main)' }}>
+            Welcome back
+          </h1>
+          <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+            Sign in to your account to continue
+          </p>
+        </div>
 
-        {/* Clerk card */}
         <div style={{ width: '100%' }}>
           <SignIn
             routing="hash"
@@ -69,7 +64,7 @@ export default function LoginPage() {
                   width: '100%',
                   background: '#FFFFFF',
                   border: '1px solid #E2E8F0',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                  boxShadow: '0 4px 24px rgba(0,0,0,0.04)',
                   borderRadius: '1rem',
                   padding: '2rem',
                   margin: '0',
@@ -82,7 +77,7 @@ export default function LoginPage() {
                   color: '#0F172A',
                   borderRadius: '0.5rem',
                   fontWeight: '500',
-                  boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
+                  boxShadow: '0 1px 2px rgba(0,0,0,0.02)',
                 },
                 socialButtonsBlockButtonText: { color: '#0F172A', fontWeight: '500' },
                 socialButtonsBlockButtonArrow: { color: '#94A3B8' },
@@ -103,7 +98,7 @@ export default function LoginPage() {
                   fontWeight: '600',
                   fontSize: '0.9375rem',
                   borderRadius: '0.5rem',
-                  boxShadow: '0 1px 3px rgba(59,130,246,0.25)',
+                  boxShadow: '0 1px 3px rgba(59,130,246,0.2)',
                   border: 'none',
                 },
                 footerActionLink: { color: '#3B82F6', fontWeight: '500' },
@@ -111,6 +106,7 @@ export default function LoginPage() {
                 identityPreviewText: { color: '#0F172A' },
                 formResendCodeLink: { color: '#3B82F6' },
                 alertText: { color: '#0F172A' },
+                footer: { display: 'none' },
                 otpCodeFieldInput: {
                   background: '#FFFFFF',
                   border: '1px solid #E2E8F0',
@@ -121,18 +117,6 @@ export default function LoginPage() {
             }}
           />
         </div>
-
-        <p style={{
-          textAlign: 'center',
-          marginTop: '1.375rem',
-          color: 'var(--text-secondary)',
-          fontSize: '0.875rem',
-        }}>
-          Don&apos;t have an account?{' '}
-          <Link href="/signup" style={{ color: 'var(--primary)', fontWeight: 600, textDecoration: 'none' }}>
-            Sign up free
-          </Link>
-        </p>
       </div>
     </div>
   );
