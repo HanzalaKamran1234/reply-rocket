@@ -90,7 +90,7 @@ export default function Home() {
             {[
               { icon: <Target size={32} />, step: '01', title: 'Enter Lead URL', desc: "Paste the website URL of your prospect. We'll handle the rest automatically." },
               { icon: <Bot size={32} />, step: '02', title: 'AI Analysis', desc: "Our AI scrapes and deeply analyzes the company's value proposition and target audience." },
-              { icon: <Zap size={32} />, step: '03', title: 'Get Messages', desc: 'Receive 3 distinct, hyper-personalized message variants ready to send immediately.' },
+              { icon: <Zap size={32} />, step: '03', title: 'Get Messages', desc: 'Receive hyper-personalized message variants (1–4 depending on your plan) ready to send immediately.' },
             ].map((item) => (
               <div key={item.step} className="card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '2.5rem 2rem', transition: 'transform 0.2s, box-shadow 0.2s', cursor: 'default' }}>
                 <div style={{ 
@@ -168,7 +168,7 @@ export default function Home() {
                 <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: 0 }}>Perfect to get started</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.875rem', flex: 1 }}>
-                {['60 messages per month', 'Standard AI analysis', 'Email support', '3 message variants per lead'].map(f => (
+                {['60 messages per month', '1 message variant per lead', 'Standard AI analysis', 'Email support'].map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#D1D5DB', fontSize: '0.95rem' }}>
                     <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(79,70,229,0.15)', border: '1px solid rgba(79,70,229,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Check size={11} color="#818CF8" strokeWidth={3} />
@@ -231,7 +231,7 @@ export default function Home() {
                 <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: 0 }}>For serious sales pros</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.875rem', flex: 1 }}>
-                {['Unlimited messages', 'Advanced AI prompts', 'Priority support', '3 message variants per lead', 'Copy-to-clipboard', 'Export history'].map(f => (
+                {['Unlimited messages', '4 message variants per lead', 'Advanced AI prompts', 'Priority support', 'Copy-to-clipboard', 'Export history'].map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#F3F4F6', fontSize: '0.95rem' }}>
                     <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(129,140,248,0.2)', border: '1px solid rgba(129,140,248,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Check size={11} color="#818CF8" strokeWidth={3} />
@@ -276,7 +276,7 @@ export default function Home() {
                 <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: 0 }}>For growing teams</p>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 2rem', display: 'flex', flexDirection: 'column', gap: '0.875rem', flex: 1 }}>
-                {['500 messages per month', 'Standard AI analysis', 'Email support', '3 message variants per lead', 'Copy-to-clipboard'].map(f => (
+                {['500 messages per month', '3 message variants per lead', 'Standard AI analysis', 'Email support', 'Copy-to-clipboard'].map(f => (
                   <li key={f} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#D1D5DB', fontSize: '0.95rem' }}>
                     <span style={{ width: '18px', height: '18px', borderRadius: '50%', background: 'rgba(79,70,229,0.15)', border: '1px solid rgba(79,70,229,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <Check size={11} color="#818CF8" strokeWidth={3} />

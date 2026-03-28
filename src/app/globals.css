@@ -273,9 +273,9 @@ p {
     padding: 2rem 0 !important;
   }
 
-  /* Auth pages */
-  .auth-page {
-    padding: 2rem 1rem !important;
+  /* Auth pages — allow scrolling on very small screens */
+  main:has(.auth-page-wrap) {
+    min-height: unset !important;
   }
 
   /* Footer */

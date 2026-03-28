@@ -19,20 +19,22 @@ export default function PricingPage() {
           
           <ul style={{ listStyle: 'none', marginBottom: '2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> 60 Messages per month</li>
+            <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> <strong>1 message variant per lead</strong></li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Standard AI Analysis</li>
           </ul>
           
-          <Link href="/login" className="btn btn-secondary" style={{ width: '100%' }}>Sign Up Free</Link>
+          <Link href="/signup" className="btn btn-secondary" style={{ width: '100%' }}>Sign Up Free</Link>
         </div>
 
         {/* Starter Plan */}
         <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Starter</h2>
-          <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1.5rem' }}>$9<span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>/mo</span></div>
+          <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1.5rem' }}>$5<span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>/mo</span></div>
           <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>Perfect for solo SDRs and founders starting their outreach.</p>
           
           <ul style={{ listStyle: 'none', marginBottom: '2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> 500 Messages per month</li>
+            <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> <strong>3 message variants per lead</strong></li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Standard AI Analysis</li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Basic Email Support</li>
           </ul>
@@ -46,11 +48,12 @@ export default function PricingPage() {
             Most Popular
           </div>
           <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Pro</h2>
-          <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1.5rem' }}>$19<span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>/mo</span></div>
+          <div style={{ fontSize: '2.5rem', fontWeight: 700, marginBottom: '1.5rem' }}>$9<span style={{ fontSize: '1rem', color: 'var(--text-muted)', fontWeight: 400 }}>/mo</span></div>
           <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>For growing teams that need volume and advanced features.</p>
           
           <ul style={{ listStyle: 'none', marginBottom: '2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Unlimited Messages</li>
+            <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> <strong>4 message variants per lead</strong></li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Advanced AI Prompts</li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Export features (CSV)</li>
             <li style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}><Check color="var(--primary)" size={18} /> Priority Support</li>

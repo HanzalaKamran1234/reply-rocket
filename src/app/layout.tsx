@@ -94,7 +94,7 @@ export default async function RootLayout({
         <body>
           <Navbar userId={userId} />
 
-          <main style={{ minHeight: 'calc(100vh - 104px)' }}>
+          <main style={{ minHeight: 'calc(100vh - 64px)' }}>
             {children}
           </main>
 

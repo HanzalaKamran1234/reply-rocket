@@ -5,13 +5,14 @@ import { Rocket } from "lucide-react";
 export default function LoginPage() {
   return (
     <div
-      className="auth-page"
       style={{
         minHeight: '100vh',
         background: 'radial-gradient(ellipse at top left, rgba(79,70,229,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom right, rgba(124,58,237,0.12) 0%, transparent 50%), #0B0F19',
-        display: 'grid',
-        placeItems: 'center',
-        padding: '3rem 1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem 1.25rem',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -33,7 +34,7 @@ export default function LoginPage() {
       {/* Centered content column */}
       <div style={{
         width: '100%',
-        maxWidth: '460px',
+        maxWidth: '480px',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
@@ -41,7 +42,7 @@ export default function LoginPage() {
         alignItems: 'center',
         textAlign: 'center',
       }}>
-        {/* Logo — centred */}
+        {/* Logo */}
         <Link href="/" style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -59,12 +60,12 @@ export default function LoginPage() {
         <p style={{
           color: '#9CA3AF',
           fontSize: '0.95rem',
-          margin: '0 0 2rem',
+          margin: '0 0 1.75rem',
         }}>
           Welcome back — sign in to continue
         </p>
 
-        {/* Clerk card — full width of wrapper */}
+        {/* Clerk SignIn card */}
         <div style={{ width: '100%' }}>
           <SignIn
             routing="hash"
@@ -127,7 +128,7 @@ export default function LoginPage() {
           />
         </div>
 
-        {/* Outside-card sign-up prompt — centred */}
+        {/* Sign-up prompt */}
         <p style={{
           textAlign: 'center',
           marginTop: '1.5rem',

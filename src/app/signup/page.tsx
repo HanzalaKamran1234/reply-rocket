@@ -5,13 +5,14 @@ import { Rocket } from "lucide-react";
 export default function SignupPage() {
   return (
     <div
-      className="auth-page"
       style={{
         minHeight: '100vh',
         background: 'radial-gradient(ellipse at top right, rgba(124,58,237,0.18) 0%, transparent 50%), radial-gradient(ellipse at bottom left, rgba(79,70,229,0.12) 0%, transparent 50%), #0B0F19',
-        display: 'grid',
-        placeItems: 'center',
-        padding: '3rem 1.5rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '2rem 1.25rem',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -33,7 +34,7 @@ export default function SignupPage() {
       {/* Centered content column */}
       <div style={{
         width: '100%',
-        maxWidth: '460px',
+        maxWidth: '480px',
         position: 'relative',
         zIndex: 1,
         display: 'flex',
@@ -41,7 +42,7 @@ export default function SignupPage() {
         alignItems: 'center',
         textAlign: 'center',
       }}>
-        {/* Logo — centred */}
+        {/* Logo */}
         <Link href="/" style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -59,12 +60,12 @@ export default function SignupPage() {
         <p style={{
           color: '#9CA3AF',
           fontSize: '0.95rem',
-          margin: '0 0 2rem',
+          margin: '0 0 1.75rem',
         }}>
           Create your free account — no credit card needed
         </p>
 
-        {/* Clerk SignUp — full width of wrapper */}
+        {/* Clerk SignUp card */}
         {/* First name & last name are enabled in: Clerk Dashboard → User & Authentication → Personal Information */}
         <div style={{ width: '100%' }}>
           <SignUp
@@ -133,7 +134,7 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Outside-card sign-in prompt — centred */}
+        {/* Sign-in prompt */}
         <p style={{
           textAlign: 'center',
           marginTop: '1.5rem',

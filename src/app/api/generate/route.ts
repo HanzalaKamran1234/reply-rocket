@@ -51,15 +51,25 @@ export async function POST(request: Request) {
       userData = newData
     }
 
-    const limits = {
+    // Usage limits per plan (messages per month)
+    const usageLimits = {
       free: 60,
       starter: 500,
       pro: Infinity
     }
 
-    const currentLimit = limits[userData.plan as keyof typeof limits] || 60
+    // Message variants per lead per plan
+    const variantLimits = {
+      free: 1,
+      starter: 3,
+      pro: 4
+    }
 
-    if (userData.usage_count >= currentLimit) {
+    const currentPlan = userData.plan as keyof typeof usageLimits
+    const currentUsageLimit = usageLimits[currentPlan] || 60
+    const variantCount = variantLimits[currentPlan] || 1
+
+    if (userData.usage_count >= currentUsageLimit) {
       return NextResponse.json({ error: `Usage limit reached for ${userData.plan} plan. Please upgrade.` }, { status: 403 })
     }
 
@@ -86,11 +96,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Could not extract enough meaningful text from the URL' }, { status: 400 })
     }
 
-    // 4. Call Gemini API
+    // 4. Call Gemini API — generate the correct number of variants for this plan
     const prompt = `
 You are an expert cold outreach copywriter who writes highly natural, human-like, short messages.
 
-Your task is to generate 1 personalized cold outreach opening message based on a website.
+Your task is to generate exactly ${variantCount} different personalized cold outreach opening message${variantCount > 1 ? 's' : ''} based on a website. Each message must be unique in angle and phrasing.
 
 Website Content to Analyze:
 ---
@@ -99,14 +109,15 @@ ${pageText}
 
 IMPORTANT STYLE RULES:
 * Write like a real human sending a quick DM (NOT an email)
-* Keep the message SHORT (2-3 sentences max, 20–35 words total)
+* Keep each message SHORT (2-3 sentences max, 20–35 words total)
 * Use simple, casual English (no corporate language)
 * DO NOT sound like a sales pitch
 * DO NOT explain too much
 * DO NOT use buzzwords like: "amplify", "leverage", "enhance", "unlock growth"
 * Avoid long sentences
+* Each variant must have a DIFFERENT opening angle, hook, or observation
 
-STRUCTURE:
+STRUCTURE for each message:
 Start with "Hey, I checked your [site/store]..."
 Mention something specific and real from the website.
 End with one simple, relevant question.
@@ -119,8 +130,8 @@ EXAMPLE:
 "Hey, I checked your store and loved how clean your candle product pages look. Are you handling customer messages manually right now?"
 
 CRITICAL OUTPUT FORMAT:
-Return ONLY a JSON array containing exactly 1 string. No markdown, no code blocks, no extra text.
-Example: ["Hey, I checked your store and loved how clean your candle product pages look. Are you handling customer messages manually right now?"]
+Return ONLY a JSON array containing exactly ${variantCount} string${variantCount > 1 ? 's' : ''}. No markdown, no code blocks, no extra text.
+Example: ["Message variant 1"${variantCount >= 2 ? ', "Message variant 2"' : ''}${variantCount >= 3 ? ', "Message variant 3"' : ''}${variantCount >= 4 ? ', "Message variant 4"' : ''}]
     `
 
     const aiResponse = await ai.models.generateContent({
@@ -138,7 +149,7 @@ Example: ["Hey, I checked your store and loved how clean your candle product pag
       const parsed = JSON.parse(generatedText)
       // Accept either an array or a plain string
       if (Array.isArray(parsed)) {
-        messages = parsed.slice(0, 1) // only take the first message
+        messages = parsed.slice(0, variantCount) // enforce plan variant count
       } else if (typeof parsed === 'string') {
         messages = [parsed]
       } else {
