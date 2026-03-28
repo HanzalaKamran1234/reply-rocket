@@ -1,8 +1,19 @@
 import Link from 'next/link'
-import { ArrowRight, Bot, Target, Zap, Check, Sparkles, ChevronRight } from 'lucide-react'
+import { ArrowRight, Bot, Target, Zap, Check, Sparkles } from 'lucide-react'
 import PricingButton from '@/components/PricingButton'
 
-/* ─── Inline styles shared across sections ─── */
+/* ─── Shared card base style ─── */
+const planCardBase: React.CSSProperties = {
+  backgroundColor: 'var(--bg-color)',
+  border: '1px solid var(--border-color)',
+  borderRadius: 'var(--radius-xl)',
+  padding: '2rem',
+  display: 'flex',
+  flexDirection: 'column',
+  boxShadow: 'var(--shadow-sm)',
+  position: 'relative',
+}
+
 const featureCardStyle: React.CSSProperties = {
   backgroundColor: 'var(--bg-color)',
   border: '1px solid var(--border-color)',
@@ -22,6 +33,13 @@ const checkItemStyle: React.CSSProperties = {
   color: 'var(--text-secondary)',
 }
 
+const checkDot = (color = 'var(--primary-light)') => ({
+  width: '18px', height: '18px', flexShrink: 0 as const,
+  borderRadius: '50%',
+  display: 'flex', alignItems: 'center' as const, justifyContent: 'center' as const,
+  backgroundColor: color,
+})
+
 export default function Home() {
   return (
     <div>
@@ -36,8 +54,7 @@ export default function Home() {
       }}>
         {/* Soft top gradient wash */}
         <div style={{
-          position: 'absolute',
-          top: 0, left: 0, right: 0,
+          position: 'absolute', top: 0, left: 0, right: 0,
           height: '420px',
           background: 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(59,130,246,0.09), transparent)',
           pointerEvents: 'none',
@@ -64,7 +81,6 @@ export default function Home() {
             <span style={{ color: 'var(--primary)' }}>actually gets replies</span>
           </h1>
 
-          {/* Sub-headline */}
           <p style={{
             fontSize: '1.175rem',
             color: 'var(--text-secondary)',
@@ -95,7 +111,6 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Social proof micro-copy */}
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: 0 }}>
             No credit card required · Free plan available · Setup in 60 seconds
           </p>
@@ -149,34 +164,20 @@ export default function Home() {
             ].map((item) => (
               <div key={item.step} style={featureCardStyle}>
                 <div style={{
-                  width: '2rem',
-                  height: '2rem',
-                  borderRadius: '50%',
+                  width: '2rem', height: '2rem', borderRadius: '50%',
                   backgroundColor: 'var(--primary-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                   marginBottom: '1.25rem',
-                  color: 'var(--primary)',
-                  fontSize: '0.75rem',
-                  fontWeight: 700,
-                  fontFamily: 'monospace',
-                }}>
-                  {item.step}
-                </div>
+                  color: 'var(--primary)', fontSize: '0.75rem', fontWeight: 700, fontFamily: 'monospace',
+                }}>{item.step}</div>
                 <div style={{
-                  width: '2.75rem',
-                  height: '2.75rem',
+                  width: '2.75rem', height: '2.75rem',
                   borderRadius: 'var(--radius-lg)',
                   backgroundColor: 'var(--primary-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
                   color: 'var(--primary)',
                   marginBottom: '1.25rem',
-                }}>
-                  {item.icon}
-                </div>
+                }}>{item.icon}</div>
                 <h3 style={{ fontSize: '1.05rem', marginBottom: '0.5rem', color: 'var(--text-main)' }}>{item.title}</h3>
                 <p style={{ margin: 0, fontSize: '0.9375rem', color: 'var(--text-secondary)', lineHeight: 1.65 }}>{item.desc}</p>
               </div>
@@ -196,218 +197,110 @@ export default function Home() {
             <p>Start free, upgrade when you need more power. No hidden fees.</p>
           </div>
 
+          {/* ── 3-column equal-height grid ── */}
           <div className="pricing-grid">
 
-            {/* ── Free ── */}
-            <div style={{
-              ...featureCardStyle,
-              padding: '2rem',
-            }}>
+            {/* ── FREE ── */}
+            <div style={planCardBase}>
               <div style={{ marginBottom: '1.5rem' }}>
-                <p style={{
-                  margin: '0 0 0.25rem',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-muted)',
-                }}>Free</p>
+                <p style={{ margin: '0 0 0.5rem', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Free</p>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '0.375rem' }}>
                   <span style={{ fontSize: '2.75rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1 }}>$0</span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>/month</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>/month</span>
                 </div>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>Perfect to get started</p>
               </div>
 
-              <ul style={{ listStyle: 'none', margin: '0 0 1.75rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, padding: 0 }}>
-                {[
-                  '60 messages per month',
-                  '1 message variant per lead',
-                  'Standard AI analysis',
-                  'Email support',
-                ].map(f => (
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingBottom: '1.75rem' }}>
+                {['60 messages per month', '1 message variant per lead', 'Standard AI analysis', 'Email support'].map(f => (
                   <li key={f} style={checkItemStyle}>
-                    <div style={{
-                      width: '18px', height: '18px', flexShrink: 0,
-                      borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: 'var(--primary-light)',
-                    }}>
-                      <Check size={11} color="var(--primary)" strokeWidth={3} />
-                    </div>
+                    <div style={checkDot()}><Check size={11} color="var(--primary)" strokeWidth={3} /></div>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              <PricingButton
-                plan="free"
-                label="Sign up free"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'center',
-                  padding: '0.625rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border-color)',
-                  background: 'var(--bg-color)',
-                  color: 'var(--text-main)',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  boxShadow: 'var(--shadow-xs)',
-                }}
-              />
+              <PricingButton plan="free" label="Sign up free" style={{
+                display: 'block', width: '100%', textAlign: 'center',
+                padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-color)', background: 'var(--bg-color)',
+                color: 'var(--text-main)', fontWeight: 600, fontSize: '0.9rem',
+                cursor: 'pointer', boxShadow: 'var(--shadow-xs)',
+              }} />
             </div>
 
-            {/* ── Starter ── */}
+            {/* ── STARTER — Most Popular ── */}
             <div style={{
-              ...featureCardStyle,
-              padding: '2rem',
+              ...planCardBase,
+              border: '2px solid var(--primary)',
+              boxShadow: '0 0 0 4px rgba(59,130,246,0.07), var(--shadow-lg)',
             }}>
-              <div style={{ marginBottom: '1.5rem' }}>
-                <p style={{
-                  margin: '0 0 0.25rem',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--text-muted)',
-                }}>Starter</p>
+              {/* Badge */}
+              <div style={{
+                position: 'absolute', top: '-1px', left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: 'var(--primary)', color: 'white',
+                padding: '0.2rem 1rem',
+                borderRadius: '0 0 8px 8px',
+                fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.07em',
+                textTransform: 'uppercase', whiteSpace: 'nowrap',
+              }}>Most Popular</div>
+
+              <div style={{ marginBottom: '1.5rem', marginTop: '0.625rem' }}>
+                <p style={{ margin: '0 0 0.5rem', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--primary)' }}>Starter</p>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '0.375rem' }}>
                   <span style={{ fontSize: '2.75rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1 }}>$5</span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>/month</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>/month</span>
                 </div>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>For solo SDRs and founders</p>
               </div>
 
-              <ul style={{ listStyle: 'none', margin: '0 0 1.75rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, padding: 0 }}>
-                {[
-                  '500 messages per month',
-                  '3 message variants per lead',
-                  'Standard AI analysis',
-                  'Email support',
-                  'Copy to clipboard',
-                ].map(f => (
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingBottom: '1.75rem' }}>
+                {['500 messages per month', '3 message variants per lead', 'Standard AI analysis', 'Email support', 'Copy to clipboard'].map(f => (
                   <li key={f} style={checkItemStyle}>
-                    <div style={{
-                      width: '18px', height: '18px', flexShrink: 0,
-                      borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: 'var(--primary-light)',
-                    }}>
-                      <Check size={11} color="var(--primary)" strokeWidth={3} />
-                    </div>
+                    <div style={checkDot()}><Check size={11} color="var(--primary)" strokeWidth={3} /></div>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              <PricingButton
-                plan="starter"
-                label="Get Starter"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'center',
-                  padding: '0.625rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  border: '1px solid var(--border-color)',
-                  background: 'var(--bg-color)',
-                  color: 'var(--text-main)',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  boxShadow: 'var(--shadow-xs)',
-                }}
-              />
+              <PricingButton plan="starter" label="Get Starter" style={{
+                display: 'block', width: '100%', textAlign: 'center',
+                padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)',
+                background: 'var(--primary)', color: 'white',
+                fontWeight: 600, fontSize: '0.9rem',
+                cursor: 'pointer', boxShadow: '0 2px 8px rgba(59,130,246,0.3)',
+                border: 'none',
+              }} />
             </div>
 
-            {/* ── Pro (featured) ── */}
-            <div style={{
-              backgroundColor: 'var(--bg-color)',
-              border: '2px solid var(--primary)',
-              borderRadius: 'var(--radius-xl)',
-              padding: '2rem',
-              display: 'flex',
-              flexDirection: 'column',
-              position: 'relative',
-              boxShadow: '0 0 0 4px rgba(59,130,246,0.07), var(--shadow-lg)',
-            }}>
-              {/* Most popular badge */}
-              <div style={{
-                position: 'absolute',
-                top: '-1px',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                backgroundColor: 'var(--primary)',
-                color: 'white',
-                padding: '0.2rem 1rem',
-                borderRadius: '0 0 8px 8px',
-                fontSize: '0.72rem',
-                fontWeight: 700,
-                letterSpacing: '0.07em',
-                textTransform: 'uppercase',
-                whiteSpace: 'nowrap',
-              }}>Most Popular</div>
-
-              <div style={{ marginBottom: '1.5rem', marginTop: '0.625rem' }}>
-                <p style={{
-                  margin: '0 0 0.25rem',
-                  fontSize: '0.8rem',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--primary)',
-                }}>Pro</p>
+            {/* ── PRO ── */}
+            <div style={planCardBase}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <p style={{ margin: '0 0 0.5rem', fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Pro</p>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '0.375rem' }}>
                   <span style={{ fontSize: '2.75rem', fontWeight: 800, color: 'var(--text-main)', lineHeight: 1 }}>$9</span>
-                  <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>/month</span>
+                  <span style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>/month</span>
                 </div>
                 <p style={{ margin: 0, fontSize: '0.875rem', color: 'var(--text-secondary)' }}>For serious sales pros</p>
               </div>
 
-              <ul style={{ listStyle: 'none', margin: '0 0 1.75rem', display: 'flex', flexDirection: 'column', gap: '0.75rem', flex: 1, padding: 0 }}>
-                {[
-                  'Unlimited messages',
-                  '4 message variants per lead',
-                  'Advanced AI prompts',
-                  'Priority support',
-                  'Copy to clipboard',
-                  'Export history',
-                ].map(f => (
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 auto', display: 'flex', flexDirection: 'column', gap: '0.75rem', paddingBottom: '1.75rem' }}>
+                {['Unlimited messages', '4 message variants per lead', 'Advanced AI prompts', 'Priority support', 'Copy to clipboard', 'Export history'].map(f => (
                   <li key={f} style={checkItemStyle}>
-                    <div style={{
-                      width: '18px', height: '18px', flexShrink: 0,
-                      borderRadius: '50%',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      backgroundColor: 'var(--primary-light)',
-                    }}>
-                      <Check size={11} color="var(--primary)" strokeWidth={3} />
-                    </div>
+                    <div style={checkDot()}><Check size={11} color="var(--primary)" strokeWidth={3} /></div>
                     {f}
                   </li>
                 ))}
               </ul>
 
-              <PricingButton
-                plan="pro"
-                label="Get Started"
-                style={{
-                  display: 'block',
-                  width: '100%',
-                  textAlign: 'center',
-                  padding: '0.625rem 1rem',
-                  borderRadius: 'var(--radius-md)',
-                  background: 'var(--primary)',
-                  color: 'white',
-                  fontWeight: 600,
-                  fontSize: '0.9rem',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(59,130,246,0.3)',
-                  border: 'none',
-                }}
-              />
+              <PricingButton plan="pro" label="Upgrade to Pro" style={{
+                display: 'block', width: '100%', textAlign: 'center',
+                padding: '0.65rem 1rem', borderRadius: 'var(--radius-md)',
+                border: '1px solid var(--border-color)', background: 'var(--bg-color)',
+                color: 'var(--text-main)', fontWeight: 600, fontSize: '0.9rem',
+                cursor: 'pointer', boxShadow: 'var(--shadow-xs)',
+              }} />
             </div>
 
           </div>

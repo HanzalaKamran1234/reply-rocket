@@ -28,17 +28,18 @@ export default function Navbar({ userId }: NavbarProps) {
 
         {/* Desktop links */}
         <div className="nav-links">
-          <Link href="/#how-it-works" className="nav-link">How it works</Link>
-          <Link href="/#pricing" className="nav-link">Pricing</Link>
-
           {!userId ? (
             <>
+              <Link href="/#how-it-works" className="nav-link">How it works</Link>
+              <Link href="/#pricing" className="nav-link">Pricing</Link>
               <Link href="/login" className="btn btn-ghost" style={{ marginLeft: '0.25rem' }}>Log in</Link>
               <Link href="/signup" className="btn btn-primary" style={{ marginLeft: '0.25rem' }}>Get Started</Link>
             </>
           ) : (
             <>
-              <Link href="/dashboard" className="btn btn-secondary" style={{ marginLeft: '0.25rem' }}>Dashboard</Link>
+              <Link href="/dashboard" className="nav-link">Dashboard</Link>
+              <Link href="/history" className="nav-link">History</Link>
+              <Link href="/#pricing" className="nav-link">Pricing</Link>
               <div style={{ marginLeft: '0.5rem' }}>
                 <UserButton />
               </div>
@@ -58,16 +59,18 @@ export default function Navbar({ userId }: NavbarProps) {
 
       {/* Mobile drawer */}
       <div className={`mobile-menu${open ? ' open' : ''}`}>
-        <Link href="/#how-it-works" className="btn btn-ghost" onClick={() => setOpen(false)}>How it works</Link>
-        <Link href="/#pricing" className="btn btn-ghost" onClick={() => setOpen(false)}>Pricing</Link>
         {!userId ? (
           <>
+            <Link href="/#how-it-works" className="btn btn-ghost" onClick={() => setOpen(false)}>How it works</Link>
+            <Link href="/#pricing" className="btn btn-ghost" onClick={() => setOpen(false)}>Pricing</Link>
             <Link href="/login" className="btn btn-secondary" onClick={() => setOpen(false)}>Log in</Link>
             <Link href="/signup" className="btn btn-primary" onClick={() => setOpen(false)}>Get Started</Link>
           </>
         ) : (
           <>
-            <Link href="/dashboard" className="btn btn-secondary" onClick={() => setOpen(false)}>Dashboard</Link>
+            <Link href="/dashboard" className="btn btn-ghost" onClick={() => setOpen(false)}>Dashboard</Link>
+            <Link href="/history" className="btn btn-ghost" onClick={() => setOpen(false)}>History</Link>
+            <Link href="/#pricing" className="btn btn-ghost" onClick={() => setOpen(false)}>Pricing</Link>
             <div style={{ display: 'flex', justifyContent: 'center', paddingTop: '0.25rem' }}>
               <UserButton />
             </div>

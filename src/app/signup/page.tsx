@@ -62,6 +62,7 @@ export default function SignupPage() {
           <SignUp
             routing="hash"
             signInUrl="/login"
+            forceRedirectUrl="/dashboard"
             appearance={{
               elements: {
                 rootBox: { width: '100%' },
